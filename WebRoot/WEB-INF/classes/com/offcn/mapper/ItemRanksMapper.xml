@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.offcn.mapper.ItemRanksMapper" >
+  <resultMap id="BaseResultMap" type="com.offcn.pojo.ItemRanks" >
+    <id column="item_id" property="itemId" jdbcType="INTEGER" />
+    <id column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="rank_score" property="rankScore" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.offcn.pojo.ItemRanks" extends="BaseResultMap" >
+    <result column="rank_detail" property="rankDetail" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    item_id, order_id, rank_score
+  </sql>
+  <sql id="Blob_Column_List" >
+    rank_detail
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.offcn.pojo.ItemRanksExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from item_ranks
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.offcn.pojo.ItemRanksExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from item_ranks
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="com.offcn.pojo.ItemRanksKey" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from item_ranks
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.offcn.pojo.ItemRanksKey" >
+    delete from item_ranks
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.offcn.pojo.ItemRanksExample" >
+    delete from item_ranks
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.offcn.pojo.ItemRanks" >
+    insert into item_ranks (item_id, order_id, rank_score, 
+      rank_detail)
+    values (#{itemId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{rankScore,jdbcType=TINYINT}, 
+      #{rankDetail,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.offcn.pojo.ItemRanks" >
+    insert into item_ranks
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="itemId != null" >
+        item_id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="rankScore != null" >
+        rank_score,
+      </if>
+      <if test="rankDetail != null" >
+        rank_detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="itemId != null" >
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="rankScore != null" >
+        #{rankScore,jdbcType=TINYINT},
+      </if>
+      <if test="rankDetail != null" >
+        #{rankDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.offcn.pojo.ItemRanksExample" resultType="java.lang.Integer" >
+    select count(*) from item_ranks
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update item_ranks
+    <set >
+      <if test="record.itemId != null" >
+        item_id = #{record.itemId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.rankScore != null" >
+        rank_score = #{record.rankScore,jdbcType=TINYINT},
+      </if>
+      <if test="record.rankDetail != null" >
+        rank_detail = #{record.rankDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update item_ranks
+    set item_id = #{record.itemId,jdbcType=INTEGER},
+      order_id = #{record.orderId,jdbcType=INTEGER},
+      rank_score = #{record.rankScore,jdbcType=TINYINT},
+      rank_detail = #{record.rankDetail,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update item_ranks
+    set item_id = #{record.itemId,jdbcType=INTEGER},
+      order_id = #{record.orderId,jdbcType=INTEGER},
+      rank_score = #{record.rankScore,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.offcn.pojo.ItemRanks" >
+    update item_ranks
+    <set >
+      <if test="rankScore != null" >
+        rank_score = #{rankScore,jdbcType=TINYINT},
+      </if>
+      <if test="rankDetail != null" >
+        rank_detail = #{rankDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.offcn.pojo.ItemRanks" >
+    update item_ranks
+    set rank_score = #{rankScore,jdbcType=TINYINT},
+      rank_detail = #{rankDetail,jdbcType=LONGVARCHAR}
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.offcn.pojo.ItemRanks" >
+    update item_ranks
+    set rank_score = #{rankScore,jdbcType=TINYINT}
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,144 @@
+html{color:#000;background:#fff;}
+body{font:12px/1.5 "宋体",Tahoma,Arial,Helvetica,sans-serif;word-break:break-all;word-wrap:break-word;}
+body,h1,h2,h3,h4,h5,h6,p,dl,dd{margin:0;}ul,ol,input{margin:0;padding:0;}li{list-style: none;}img{border:none;vertical-align:middle;}table{border-collapse:collapse;border-spacing:0;}em,i{font-style:normal}b,strong,th{font-weight:normal;} a{text-decretiom:none;color: #333333;}a:hover{text-decoration:inline;color: #cc0000;}
+body{
+		margin: 0;
+		font: 14px/1.5 "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
+	}
+.bigbox{
+	width: 100%;
+	height: 609px;
+	background: #F9F9F9;
+}
+.main{
+	width: 854px;
+	height: 519px;
+	background: #fff;
+	margin: 0 auto;
+}
+.first{
+	width: 786px;
+	height: 48px;
+	margin: 0 auto;
+	margin-bottom: 40px;
+	text-align: center;
+}
+.first img{
+	width: 49px;
+	height: 48px;
+	
+}
+.second{
+	width: 786px;
+	height: 45px;
+	margin: 0 auto;
+	text-align: center;
+}
+.second span{
+	color: #000;
+	font-size: 30px;
+}
+.third{
+	width: 786px;
+	height: 356px;
+	/*text-align: center;*/
+	margin: 0 auto;
+}
+.middle{
+	width: 332px;
+	height: 356px;
+	margin: 0 auto;
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+.mid1{
+	width: 332px;
+	height: 20px;
+	font-size: 12px;
+	line-height: 20px;
+	padding-bottom: 5px;
+}
+.mid2{
+	width: 332px;
+	height: 42px;
+	font-size: 0;
+}
+.guojia{
+	display: inline-block;
+	width: 290px;
+	height: 42px;
+	padding-left: 14px;
+}
+.tijiao{
+	width: 42px;
+	height: 42px;
+}
+.mid3{
+	width: 332px;
+	height: 57px;
+	font-size: 0;
+	padding-bottom: 10px;
+	/*background: red*/
+}
+.haoma{
+	width: 72px;
+	height: 44px;
+	padding-left: 11px;
+	padding-right: 11px;
+}
+.shuru{
+	width: 236px;
+	height: 20px;
+	padding: 10px 10px 10px 10px ;
+}
+.zc{
+	width: 336px;
+	height: 40px;
+	margin-top: 15px;
+	margin-left: -2px;
+}
+.di{
+	width: 332px;
+	height: 40px;
+	margin-top: 10px;
+}
+.di span{
+	color: #9D9D9D;
+	font-size: 16px;
+}
+.di a{
+	font-size: 16px;
+	font-weight: bold;
+	text-decoration: none;
+}
+.d1{
+	width: 100%;
+	height: 20px;
+	text-align: center;
+}
+.d1 a {
+	color:  #757575;
+	font-size: 14px;
+	text-decoration: none;
+}
+.d1 .d11{
+	color: #000;
+}
+.d2{
+	width: 100%;
+	height: 44px;
+	text-align: center;
+}
+a .ga{
+	width: 20px;
+	height: 20px;
+}
+.d2z{
+	color: #757575;
+	font-size: 14px;
+}
+.d2 a{
+	color: #757575;
+	font-size: 14px;
+	text-decoration: none;
+}

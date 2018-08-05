@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title>小米商城</title>
+    <style>
+    body {
+        margin: 0;
+    }
+
+    .h_panel,
+    .login_banner {
+        width: 1130px;
+        margin: 0 auto;
+    }
+
+    .h_logo {
+        width: 200px;
+        height: 98px;
+        background: url(https://account.xiaomi.com/static/res/7f6f2f5/account-static/respassport/acc-2014/img/mistore_logo.png) no-repeat;
+    }
+
+    .h_logo a {
+        display: block;
+        height: 98px;
+        text-indent: -9999em;
+    }
+
+    .login_banner_panel {
+        /* background:#1e2f40;*/
+        width: 100%;
+        height: 588px;
+        position: absolute;
+        left: 0;
+        top: 98px;
+        background-repeat: no-repeat;
+        background-position: top center;
+    }
+
+    .login_banner_panel a {
+        display: block;
+        height: 588px;
+        text-indent: -9999em;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="h_panel">
+        <div class="h_logo">
+            <a href="/" target="_parent" data-stat-repeat="true" data-stat-id="9759eb3ad65a9418" onclick="_msq.push(['trackEvent', 'ba30dc918f1e51a9-9759eb3ad65a9418', '//www.mi.com/index.html', 'pcpid', '']);">小米网</a>
+        </div>
+    </div>
+    <div class="login_banner_panel" id="J_panel" style="background-image: url(&quot;https://i8.mifile.cn/b2c-mimall-media/cd392f87b6584283a5a1fd285418b654.jpg&quot;);">
+        <!-- 底部定位的bg -->
+        <a href="https://www.mi.com/mix2s/" target="_parent" id="J_link" data-log_code="pc#bid=3229104.1&amp;page=promotion" data-stat-repeat="true" data-stat-id="5a61d914c7e48503" onclick="_msq.push(['trackEvent', 'ba30dc918f1e51a9-5a61d914c7e48503', 'https://www.mi.com/mix2s/', 'pcpid', 'pc#bid=3229104.1&amp;page=promotion']);">小米网</a>
+    </div>
+    <script type="text/javascript" async="" src="loginbanner_data/mstr.js"></script><script type="text/javascript" async="" src="loginbanner_data/jquery.js"></script><script type="text/javascript" async="" src="loginbanner_data/xmst.js"></script><script type="text/javascript" async="" src="loginbanner_data/pc_login_config.js"></script><script>
+        var dataTimer;
+        var id ;
+        var verNum = parseInt((new Date().getTime() / 1000) / 100);
+        var cdnUrl = '//cdn.fds-ssl.api.xiaomi.com/b2c-webfile/cms/js/pc_login_config.js?_' + verNum;
+        var viewUrl = '//order.mi.com/ajax/getloginconfig?pc_template_id=';
+
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.parent.location.search.substr(1).match(reg);
+            if (r !== null) return unescape(r[2]);
+            return null;
+        };
+
+        function loadUrl(url) {
+            var stag = document.createElement('script');
+            var s = document.getElementsByTagName('script')[0];
+
+            stag.type ='text/javascript';
+            stag.async = true;
+            stag.src = url;
+
+            s.parentNode.insertBefore(stag, s);
+        }
+
+        // id = getQueryString('pc_template_id');
+
+        if (id) {
+            viewUrl += id;
+            loadUrl(viewUrl);
+        } else {
+            loadUrl(cdnUrl);
+        }
+
+        function getData() {
+
+            clearTimeout(dataTimer);
+
+            dataTimer = setTimeout(function() {
+                if (typeof pcloginConfig !== 'undefined' && pcloginConfig && pcloginConfig.page_action && pcloginConfig.page_url) {
+                    document.getElementById('J_panel').style.backgroundImage = 'url(' + pcloginConfig.page_url + ')';
+                    document.getElementById('J_link').href = pcloginConfig.page_action;
+                    document.getElementById('J_link').setAttribute('data-log_code','pc#bid=' + pcloginConfig.block_id + '.1&page=promotion');  
+                    if(window.xmstLittle && xmstLittle.isFunction(xmstLittle.fn.linkSign) ) {
+                        xmstLittle('body').linkSign({
+                            repeat:true //设置此参数后,所有元素都将重新计算
+                        });
+                    };
+                    
+                } else {
+                    getData();
+                }
+            }, 500);
+        }
+
+        getData();
+    </script>
+
+    <script>
+        var _msq = _msq || [] ;
+        _msq.push(['setDomainId', 132]);
+        _msq.push(['trackPageView']);
+        (function() {
+            var ms = document.createElement('script');
+            ms.type ='text/javascript';
+            ms.async = true;
+            ms.src = '//s1.mi.com/stat/18/xmst.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ms, s);
+        })();
+    </script>
+
+
+
+</body></html>

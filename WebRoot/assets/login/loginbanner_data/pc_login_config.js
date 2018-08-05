@@ -1,0 +1,2 @@
+var pcloginConfig = {"id":18,"page_action":"https:\/\/www.mi.com\/mix2s\/","page_url":"https:\/\/i8.mifile.cn\/b2c-mimall-media\/cd392f87b6584283a5a1fd285418b654.jpg","block_id":3229104};
+//_t=0727205004

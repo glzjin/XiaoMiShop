@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.offcn.mapper.ItemsMapper" >
+  <resultMap id="BaseResultMap" type="com.offcn.pojo.Items" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="item_name" property="itemName" jdbcType="VARCHAR" />
+    <result column="item_price" property="itemPrice" jdbcType="DECIMAL" />
+    <result column="item_sku" property="itemSku" jdbcType="INTEGER" />
+    <result column="item_sold" property="itemSold" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="item_category_id" property="itemCategoryId" jdbcType="INTEGER" />
+    <result column="is_hot" property="isHot" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.offcn.pojo.ItemsWithBLOBs" extends="BaseResultMap" >
+    <result column="item_description" property="itemDescription" jdbcType="LONGVARCHAR" />
+    <result column="item_img_uri" property="itemImgUri" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, item_name, item_price, item_sku, item_sold, status, item_category_id, is_hot
+  </sql>
+  <sql id="Blob_Column_List" >
+    item_description, item_img_uri
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.offcn.pojo.ItemsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from items
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.offcn.pojo.ItemsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from items
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from items
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from items
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.offcn.pojo.ItemsExample" >
+    delete from items
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.offcn.pojo.ItemsWithBLOBs" >
+    insert into items (id, item_name, item_price, 
+      item_sku, item_sold, status, 
+      item_category_id, is_hot, item_description, 
+      item_img_uri)
+    values (#{id,jdbcType=INTEGER}, #{itemName,jdbcType=VARCHAR}, #{itemPrice,jdbcType=DECIMAL}, 
+      #{itemSku,jdbcType=INTEGER}, #{itemSold,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, 
+      #{itemCategoryId,jdbcType=INTEGER}, #{isHot,jdbcType=TINYINT}, #{itemDescription,jdbcType=LONGVARCHAR}, 
+      #{itemImgUri,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.offcn.pojo.ItemsWithBLOBs" >
+    insert into items
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="itemName != null" >
+        item_name,
+      </if>
+      <if test="itemPrice != null" >
+        item_price,
+      </if>
+      <if test="itemSku != null" >
+        item_sku,
+      </if>
+      <if test="itemSold != null" >
+        item_sold,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="itemCategoryId != null" >
+        item_category_id,
+      </if>
+      <if test="isHot != null" >
+        is_hot,
+      </if>
+      <if test="itemDescription != null" >
+        item_description,
+      </if>
+      <if test="itemImgUri != null" >
+        item_img_uri,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="itemName != null" >
+        #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemPrice != null" >
+        #{itemPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="itemSku != null" >
+        #{itemSku,jdbcType=INTEGER},
+      </if>
+      <if test="itemSold != null" >
+        #{itemSold,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="itemCategoryId != null" >
+        #{itemCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="isHot != null" >
+        #{isHot,jdbcType=TINYINT},
+      </if>
+      <if test="itemDescription != null" >
+        #{itemDescription,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="itemImgUri != null" >
+        #{itemImgUri,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.offcn.pojo.ItemsExample" resultType="java.lang.Integer" >
+    select count(*) from items
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update items
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.itemName != null" >
+        item_name = #{record.itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemPrice != null" >
+        item_price = #{record.itemPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.itemSku != null" >
+        item_sku = #{record.itemSku,jdbcType=INTEGER},
+      </if>
+      <if test="record.itemSold != null" >
+        item_sold = #{record.itemSold,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.itemCategoryId != null" >
+        item_category_id = #{record.itemCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.isHot != null" >
+        is_hot = #{record.isHot,jdbcType=TINYINT},
+      </if>
+      <if test="record.itemDescription != null" >
+        item_description = #{record.itemDescription,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.itemImgUri != null" >
+        item_img_uri = #{record.itemImgUri,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update items
+    set id = #{record.id,jdbcType=INTEGER},
+      item_name = #{record.itemName,jdbcType=VARCHAR},
+      item_price = #{record.itemPrice,jdbcType=DECIMAL},
+      item_sku = #{record.itemSku,jdbcType=INTEGER},
+      item_sold = #{record.itemSold,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=TINYINT},
+      item_category_id = #{record.itemCategoryId,jdbcType=INTEGER},
+      is_hot = #{record.isHot,jdbcType=TINYINT},
+      item_description = #{record.itemDescription,jdbcType=LONGVARCHAR},
+      item_img_uri = #{record.itemImgUri,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update items
+    set id = #{record.id,jdbcType=INTEGER},
+      item_name = #{record.itemName,jdbcType=VARCHAR},
+      item_price = #{record.itemPrice,jdbcType=DECIMAL},
+      item_sku = #{record.itemSku,jdbcType=INTEGER},
+      item_sold = #{record.itemSold,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=TINYINT},
+      item_category_id = #{record.itemCategoryId,jdbcType=INTEGER},
+      is_hot = #{record.isHot,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.offcn.pojo.ItemsWithBLOBs" >
+    update items
+    <set >
+      <if test="itemName != null" >
+        item_name = #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemPrice != null" >
+        item_price = #{itemPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="itemSku != null" >
+        item_sku = #{itemSku,jdbcType=INTEGER},
+      </if>
+      <if test="itemSold != null" >
+        item_sold = #{itemSold,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="itemCategoryId != null" >
+        item_category_id = #{itemCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="isHot != null" >
+        is_hot = #{isHot,jdbcType=TINYINT},
+      </if>
+      <if test="itemDescription != null" >
+        item_description = #{itemDescription,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="itemImgUri != null" >
+        item_img_uri = #{itemImgUri,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.offcn.pojo.ItemsWithBLOBs" >
+    update items
+    set item_name = #{itemName,jdbcType=VARCHAR},
+      item_price = #{itemPrice,jdbcType=DECIMAL},
+      item_sku = #{itemSku,jdbcType=INTEGER},
+      item_sold = #{itemSold,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      item_category_id = #{itemCategoryId,jdbcType=INTEGER},
+      is_hot = #{isHot,jdbcType=TINYINT},
+      item_description = #{itemDescription,jdbcType=LONGVARCHAR},
+      item_img_uri = #{itemImgUri,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.offcn.pojo.Items" >
+    update items
+    set item_name = #{itemName,jdbcType=VARCHAR},
+      item_price = #{itemPrice,jdbcType=DECIMAL},
+      item_sku = #{itemSku,jdbcType=INTEGER},
+      item_sold = #{itemSold,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      item_category_id = #{itemCategoryId,jdbcType=INTEGER},
+      is_hot = #{isHot,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
